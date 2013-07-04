@@ -1,0 +1,123 @@
+﻿<Window x:Class="JunctionMaster.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Junction Master" Height="782" Width="525" Closing="Window_Closing">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Drive letters" Padding="3" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Source volume" Margin="3"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="Target volume" Margin="3"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Drive letter on host OS" Margin="3"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Drive letter on target OS" Margin="3"/>
+                <TextBox x:Name="TBSourceVolumeOnHostOS" Grid.Row="2" Grid.Column="1" Margin="3" IsEnabled="False" Text="?"/>
+                <TextBox x:Name="TBDestinationVolumeOnHostOS" Grid.Row="2" Grid.Column="2" Margin="3" IsEnabled="False" Text="?"/>
+                <TextBox x:Name="TBSourceVolumeOnTargetOS" Grid.Row="3" Grid.Column="1" Margin="3"/>
+                <TextBox x:Name="TBDestinationVolumeOnTargetOS" Grid.Row="3" Grid.Column="2" Margin="3"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="5" Text="Source folders" Padding="3" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <ListBox x:Name="LBDirectories" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" SelectionChanged="LBDirectories_SelectionChanged"/>
+                <Button x:Name="BLoadDirectories" Grid.Row="2" Grid.Column="0" Content="Load directory list" Margin="3" Padding="3" Click="BLoadDirectories_Click"/>
+                <Button x:Name="BClearDirectories" Grid.Row="2" Grid.Column="2" Content="Clear" Margin="3" Padding="3" Click="BClearDirectories_Click"/>
+                <Button x:Name="BRemoveDirectory" Grid.Row="2" Grid.Column="3" Content="Remove directory" Margin="3" Padding="3" IsEnabled="False" Click="BRemoveDirectory_Click"/>
+                <Button x:Name="BAddDirectory" Grid.Row="2" Grid.Column="4" Content="Add directory" Margin="3" Padding="3" Click="BAddDirectory_Click"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Destination folder" Padding="3" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <TextBlock x:Name="TBDestinationPath" Grid.Row="1" Grid.Column="0" Text="Select a path..." Margin="3" Padding="3" IsEnabled="False"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="Browse" Margin="3" Padding="3" Click="BBrowseDestination_Click"/>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Move directories" Padding="3" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Margin="3" TextWrapping="Wrap" TextAlignment="Justify">Disclaimer: This program come "AS IS", without warranty. You should always make a backup from your data. If you move system directories and/or use incorrect options your PC may not boot.</TextBlock>
+                <Button x:Name="BStart" Grid.Row="2" Grid.Column="1" Content="Generate batch files" Margin="3" Padding="3" Click="BStart_Click"/>
+                <Button x:Name="BExecute" Grid.Row="2" Grid.Column="2" Content="Execute" Margin="3" Padding="3" Click="BExecute_Click"/>
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Recovery (run this from the OS that created the junctions)" Padding="3" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <ListBox x:Name="LBRecovery" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" SelectionChanged="LBRecovery_SelectionChanged"/>
+                <Button x:Name="BRecover" Grid.Row="2" Grid.Column="1" Content="Recover" Margin="3" Padding="3" IsEnabled="False" Click="BRecover_Click"/>
+            </Grid>
+
+            <Grid Grid.Row="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Finalize changes (run this from the target OS)" Padding="3" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                <ListBox x:Name="LBFinalize" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" SelectionChanged="LBFinalize_SelectionChanged"/>
+                <Button x:Name="BFinalize" Grid.Row="2" Grid.Column="1" Content="Finalize" Margin="3" Padding="3" IsEnabled="False" Click="BFinalize_Click"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Window>
